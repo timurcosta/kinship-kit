@@ -1,0 +1,35 @@
+{
+ "title": "Фамилия: семейная история",
+ "brand": "Фамилия",
+ "brandLong": ": семейная история",
+ "kicker": "Семейное исследование · линия …",
+ "h1": "Главный герой (варианты фамилии)",
+ "ctaMap": "Открыть карту",
+ "pdf": "Фамилия_семейная_история.pdf",
+ "publicPdf": "familiya-semeynaya-istoriya.pdf",
+ "naturalEarth": "~/.cache/kinship-site/naturalearth",
+ "hosting": {"bucket": "familiya-0000000000", "repo": "<github-user>/familiya-family"},
+ "heroPhoto": {"src": "../photos/semya.png", "alt": "Кто на фото", "caption": "Кто, где, когда. Из семейного архива."},
+ "tree": {
+  "lede": "Нажмите на человека — карта покажет его место. Пунктир — родство не доказано.",
+  "gens": [
+   {"label": "Прадеды", "people": [
+     {"id": "t-a", "name": "Имя Отчество Фамилия", "sub": "годы, место", "tag": "ok", "tagText": "по документу", "place": "village_key"},
+     {"id": "t-b", "name": "Имя Отчество", "sub": "урожд. …", "tag": "fam", "tagText": "по сведениям семьи"}]},
+   {"label": "Деды", "people": [
+     {"id": "t-c", "name": "Имя Отчество", "sub": "дед", "parents": ["t-a", "t-b"], "tag": "fam", "tagText": "по сведениям семьи"}]},
+   {"label": "", "people": [{"id": "t-you", "name": "Вы", "sub": "&nbsp;", "parents": ["t-c"]}]}
+  ]
+ },
+ "mapHint": "Нажмите на значок — откроются события и документы. Пунктирная обводка — место приблизительно.",
+ "footer": "Живая версия отчёта по линии …. Текст совпадает с PDF; источники и надёжность каждого вывода — в отчёте.",
+ "mapFigures": {"map-family.svg": "family"},
+ "placeOverrides": {},
+ "timeline": {"section": "Хронология", "defaultYear": 1900, "special": {}},
+ "basemap": {
+  "bbox": [40.0, 50.0, 56.0, 58.0],
+  "lakes": ["Caspian"],
+  "riversNamed": ["Volga", "Kama", "Sviyaga"],
+  "riverLabels": [["Волга", 55.2, 48.9]]
+ }
+}

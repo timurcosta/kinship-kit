@@ -1,0 +1,48 @@
+name: Deploy site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - '__PDF__'
+      - 'pdf-source/web/stage_public.py'
+      - 'pdf-source/web/site.json'
+      - 'pdf-source/web/version-notes.json'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      BUCKET: __BUCKET__
+      AWS_ACCESS_KEY_ID: ${{ secrets.YC_STORAGE_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_STORAGE_SECRET }}
+      AWS_DEFAULT_REGION: ru-central1
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # old versions of the site are built from git history
+
+      - name: Stage public copy
+        run: python3 -I pdf-source/web/stage_public.py . "$RUNNER_TEMP/site"
+
+      - name: Upload to Object Storage
+        run: |
+          S3="aws s3 sync --endpoint-url https://storage.yandexcloud.net --only-show-errors"
+          # images and vendor files are shared by all versions, so they are never deleted
+          $S3 --size-only "$RUNNER_TEMP/site/img" "s3://$BUCKET/img/"
+          $S3 --size-only "$RUNNER_TEMP/site/assets/vendor" "s3://$BUCKET/assets/vendor/"
+          $S3 "$RUNNER_TEMP/site/v" "s3://$BUCKET/v/" --delete
+          $S3 "$RUNNER_TEMP/site" "s3://$BUCKET/" --delete --exclude "img/*" --exclude "assets/vendor/*" --exclude "v/*"
+
+      - name: Check the site answers
+        run: |
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://$BUCKET.website.yandexcloud.net/")
+          echo "HTTP $code"
+          test "$code" = 200

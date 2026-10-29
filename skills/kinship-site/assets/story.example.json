@@ -1,0 +1,18 @@
+{
+ "views": {
+  "family": {"title": "Семья", "bounds": [[53.5, 46.0], [56.5, 52.0]]}
+ },
+ "kinds": {
+  "home": {"label": "дом семьи", "color": "#7a2e1f"},
+  "birth": {"label": "место рождения", "color": "#b5651d"},
+  "death": {"label": "умер, похоронен", "color": "#1d1d1f"},
+  "ref": {"label": "город, архив", "color": "#5f6368"}
+ },
+ "places": [
+  {"key": "village_key", "name": "Село", "q": "Село, район, область", "kind": "home", "views": ["family"], "dir": "right",
+   "events": [{"date": "1890-е", "text": "Что здесь было", "tag": "ok", "img": "../scans/… .jpg"}]}
+ ],
+ "routes": [],
+ "steps": [],
+ "front": []
+}

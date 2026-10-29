@@ -1,0 +1,10 @@
+# Only the public site, its PDF and the build sources go to git.
+# Registers, family chats, inputs, scan/photo originals and archive drafts stay local.
+/*
+!/.gitignore
+!/.github/
+!/web/
+!/pdf-source/
+!/__PDF__
+.DS_Store
+__pycache__/
