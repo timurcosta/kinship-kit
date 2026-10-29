@@ -9,7 +9,7 @@
 ## Установка
 
 ```bash
-git clone <ссылка на этот репозиторий> ~/kinship-kit
+git clone https://github.com/timurcosta/kinship-kit ~/kinship-kit
 zsh ~/kinship-kit/install.sh ~/genealogy
 ```
 
